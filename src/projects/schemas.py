@@ -1,12 +1,33 @@
+from marshmallow import fields
 from projects import ma
-from projects.models import Users
+from projects.models import PriceMenu, WeekMenus, TypeMenu, DetailTypesMenu
 
 
-class UserSchema(ma.SQLAlchemyAutoSchema):
+class PriceMenuSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Users
+        model = PriceMenu
         load_instance = True
-        load_only = ('password', )
+
+class WeekMenusSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = WeekMenus
+        load_instance = True
 
 
-user_schema = UserSchema()
+class TypeMenuSchema(ma.SQLAlchemyAutoSchema):
+    details_type_menus = fields.Nested('DetailTypesMenuSchema', default=[], many=True)
+    class Meta:
+        model = TypeMenu
+        load_instance = True
+
+
+class DetailTypesMenuSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = DetailTypesMenu
+        load_instance = True
+
+
+pricemenu_schema = PriceMenuSchema()
+weekmenus_schema = WeekMenusSchema()
+typemenu_schema = TypeMenuSchema()
+detailtypemenu_schema = DetailTypesMenuSchema()
