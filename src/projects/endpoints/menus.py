@@ -16,7 +16,7 @@ from projects.schemas import (
 import marshmallow
 
 
-blueprint = Blueprint('users', __name__)
+blueprint = Blueprint('menus', __name__)
 
 
 def check_token():
